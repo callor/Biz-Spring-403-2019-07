@@ -1,0 +1,116 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<style>
+	* {
+		box-sizing: border-box;
+	}
+	
+	fieldset {
+		width:50%;
+		margin:10px auto;
+		border-radius: 4px;
+	}
+	
+	legend {
+		font-weight: bold;
+		color:blue;
+	}
+	
+	div.in-box {
+		display: flex;
+		margin:3px;
+	}
+	
+	div.in-box label {
+		display: block;
+		/* 화면이 커질때는 자동설정, 화면이 작아지면 80px 까지만 축소 */
+		min-width : 80px; 
+		text-align: right;
+		margin:5px;
+		font-size:9pt;
+		font-weight: bold;
+	}
+	
+	div.in-box input {
+		display: block;
+		width:80%;
+		margin:5px;
+		border : 1px solid gray;
+		border-radius: 5px;
+		padding : 3px 5px; /* box내부의 글자 부분에 여백주기 */
+	}
+	div.in-box input:hover {
+		border:1px solid red;
+	}
+	
+	div.in-box input:focus {
+		background-color: lightblue;
+	}
+	
+	div.btn-box {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		padding:5px;
+	}
+	button.btn {
+		border-radius: 5px;
+		display: inline-block;
+		padding: 10px 15px;
+		margin: 4px 8px;
+		border:none;
+	}
+	
+	/* 오른쪽, 아래, 흐림, 색상 */
+	button.btn:hover {
+		box-shadow: 10px 10px 10px grey;
+	}
+	
+	button.btn.save {
+		background-color: blue;
+		color:white;
+	}
+	
+	button.btn.reset {
+		background-color: orange;
+		color:white;
+	}
+	
+	button.btn.list {
+		background-color: green;
+		color:white;
+	}
+	
+}
+	
+
+
+</style>
+
+<form method="POST">
+	<fieldset>
+		<legend>도서정보</legend>
+		<div class="in-box">
+			<label for="b_title">도서명</label>
+			<input type="text" id="b_title" name="b_title">
+		</div>
+		<div class="in-box">
+			<label for="b_comp">출판사</label>
+			<input type="text" id="b_comp" name="b_comp">
+		</div>
+		<div class="in-box">
+			<label for="b_auth">저자</label>
+			<input type="text" id="b_auth" name="b_auth">
+		</div>
+		<div class="in-box">
+			<label for="b_title">가격</label>
+			<input type="text" id="b_price" name="b_price">
+		</div>
+		<div class="btn-box">
+			<button type="submit" class="btn save">저장</button>
+			<button type="reset" class="btn reset">다시작성</button>
+			<button type="button" class="btn list">목록으로</button>
+		</div>
+	</fieldset>
+</form>
+    

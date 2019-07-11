@@ -1,0 +1,29 @@
+오라클의 ojdbc*.jar 파일은 공식으로 오라클이외에 곳에서
+다운로드가 금지되어 있다.
+그래서 spring pom.xml에 해당 사항을 등록해도
+자동으로 다운로드를 하지 않는다.
+
+때문에 우회통로를 이용해서 다운으로드를 설정해하는데
+depndency 설정 외에 repository를 설정해주어야 한다.
+
+http://maven.icm.edu.pl/artifactory/repo/
+<!-- https://mvnrepository.com/artifact/com.oracle/ojdbc6 -->
+<dependency>
+    <groupId>com.oracle</groupId>
+    <artifactId>ojdbc6</artifactId>
+    <version>12.2.0.1</version>
+    <scope>test</scope>
+</dependency>
+
+
+
+https://packages.atlassian.com/maven-3rdparty/
+<!-- https://mvnrepository.com/artifact/com.oracle/ojdbc6 -->
+<dependency>
+    <groupId>com.oracle</groupId>
+    <artifactId>ojdbc6</artifactId>
+    <version>12.1.0.1-atlassian-hosted</version>
+    <scope>test</scope>
+</dependency>
+
+

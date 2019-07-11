@@ -15,8 +15,6 @@
 		margin:10px auto;
 		border-radius: 4px;
 		box-sizing: border-box;
-		-webkit-box-sizing: border-box;
-		-mos-box-sizing: border-box;
 	}
 	
 	legend {
@@ -49,6 +47,7 @@
 	
 	div.btn-box button {
 		background-color: green;
+		border: 2px solid green;
 		color:white;
 		display: inline-block;
 		padding: 15px 32px;
@@ -56,7 +55,6 @@
 		margin: 4px 2px;
 		cursor : pointer;
 		text-align: center;
-		border : 0;
 		border-radius: 8px;
 		transition-duration : 0.5s;
 		-webkit-transition-duration : 0.5s; /* safari */

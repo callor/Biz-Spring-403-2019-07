@@ -1,0 +1,45 @@
+spring에서 mybatis를 사용하여 DBMS와 연동할때
+pom.xml에 설정해야할 공통 dependency
+
+1. spring-jdbc
+	<dependency>
+		<groupId>org.springframework</groupId>
+		<artifactId>spring-jdbc</artifactId>
+		<version>${org.springframework-version}</version>
+	</dependency>
+	※ 주의사항 spring-jdbc는 
+		반드시 spring관련 다른 dependecy와 
+		version을 일치시킨다
+		그래서 버전부분을 아래와 같이 설정
+		<version>${org.springframework-version}</version>
+
+2. mybatis
+		<dependency>
+			<groupId>org.mybatis</groupId>
+			<artifactId>mybatis</artifactId>
+			<version>3.5.1/version>
+		</dependency>
+		※ 버전에 관계없이 사용하고자 하는 lib 사용하면 된다.
+		3.3.x 하고 3.4.x 대와는 mapper 설정에서 다소 차이가 있다.
+		
+3. mybatis-spring
+		<dependency>
+			<groupId>org.mybatis</groupId>
+			<artifactId>mybatis-spring</artifactId>
+			<version>2.0.1</version>
+		</dependency>
+
+4. commons-dbcp
+ - apache 재단에서 만든 database connection pool 이다
+ - db pool이란 db 연결을 위해서 몇개의 연결 통로를 미리 설정하고
+ - java, server의 요청에따라 connection을 분배하여 효율을 높이는 기법
+ 
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-dbcp2</artifactId>
+			<version>2.6.0</version>
+		</dependency>
+		
+ - 참고사항 java 7 이하에서는 commans-dbcp 를 사용하고
+   그 이후버전에서는 command-dbcp2를 사용하는 것이 좋다.
+
