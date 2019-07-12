@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mybatis-spring="http://mybatis.org/schema/mybatis-spring"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
+		http://mybatis.org/schema/mybatis-spring http://mybatis.org/schema/mybatis-spring-1.2.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
+	<!-- dataSource, sqlFactoryBean, sqlSession -->
+	<!-- BasicDataSource ds = nwe BasicDataSource() -->
+	<!-- 
+		DB Query 중에 오류가 발생할 경우
+		JDBC Connection 이라는 오류 문자열이 보일경우 
+		url 부분을 살펴보자
+	-->
+	<!-- 
+		invalid username password logon denied 메시가 보이면
+		username과 password를 살피자
+	 -->
+	<bean id="ds" class="org.apache.commons.dbcp2.BasicDataSource">
+		<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"/>
+		<property name="url" value="jdbc:oracle:thin:@localhost:1521:xe"/>
+		<property name="username" value="user6"/>
+		<property name="password" value="1234"/>
+	</bean>
+	
+	<!-- 
+		Factory를 선언할때
+		dataSource는 value가 아니고 
+		ref로 설정해야 한다
+	 -->
+	<bean id="sqlSessionFacotry" 
+			class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="ds"/>
+		<property name="configLocation" 
+			value="/WEB-INF/spring/mybatis/mybatis-config.xml"/>
+		<property name="mapperLocations">
+			<list>
+				<value>/WEB-INF/spring/mybatis/book-mapper.xml</value>			
+			</list>
+		</property>
+	</bean>
+	
+	<!-- SessionTemplete는 property가 없다. -->
+	<bean id="sqlSession" 
+		class="org.mybatis.spring.SqlSessionTemplate">
+		<constructor-arg index="0" ref="sqlSessionFacotry"/>
+	</bean>
+
+
+</beans>
