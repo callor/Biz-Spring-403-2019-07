@@ -1,0 +1,59 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib 
+	uri="http://java.sun.com/jsp/jstl/core" 
+	prefix="c" %>    
+<style>
+	table {
+		width:50%;
+		margin:20px auto;
+		border-top:2px solid #252525;
+		border-bottom:1px solid #ccc;
+	}
+	
+	th {
+		width:15%;
+		text-align:left;
+		background-color: #f7f7f7;
+		color:#3b3a3a;
+		padding:0 0 0 15px;
+		border-top:1px solid #ccc;
+		border-bottom:1px solid #ccc;
+	}
+	
+	td {
+		width:15%;
+		padding:30px 18px;
+		border-top:1px solid #ccc;
+		border-bottom:1px solid #ccc;
+	}
+	
+	caption {
+		padding:10px;
+		font-weight: bold;
+		color:blue;
+	}
+</style>
+<table>
+	<caption>로그인 회원정보</caption>
+	<tr>
+		<th>사용자ID</th>
+		<td>${USER.m_userid}</td>
+		
+		<th>사용자명</th>
+		<td>${USER.m_name}</td>
+	</tr>
+	
+	<tr>
+		<th>E-mail</th>
+		<td>${USER.m_email}</td>
+		
+		<th>전화번호</th>
+		<td>${USER.m_tel}</td>
+	</tr>
+
+	
+	
+	
+
+</table>
