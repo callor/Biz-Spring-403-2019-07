@@ -16,7 +16,7 @@ header a.logo {
     display: inline-block;
     background-color: #F35b66;
     color:inherit;
-    margin: 50px 0 0 50px;
+    margin: 20px 0 0 50px;
     padding: 20px 30px;
     text-decoration: none;
 }
@@ -26,6 +26,7 @@ nav {
     padding:0;
     background-color: #3eb5ff;
     color:#fff;
+    box-sizing: border-box;
 }
 ul.main-menu {
     display: flex;
@@ -33,7 +34,10 @@ ul.main-menu {
     margin:0;
     padding: 0;
     color:inherit;
+    
 }
+
+
 ul.main-menu a {
     display: block;
     color:inherit;
@@ -46,6 +50,7 @@ ul.main-menu a:hover {
     color:blue;
     font-weight: bold;
     border-bottom:3px solid blue;
+    
 }
 
 ul.main-menu a:hover nav {
