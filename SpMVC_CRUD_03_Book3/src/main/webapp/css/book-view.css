@@ -1,0 +1,33 @@
+@charset "UTF-8";
+
+table.bz-view-table {
+	width: 50%;
+	margin: 20px auto;
+	border-top: 2px solid #252525;
+	border-bottom: 1px solid #ccc;
+}
+
+th.bz-view-th,th.bz-view-td {
+	width:15%;
+	border-top: 1px solid #ccc;
+	border-bottom: 1px solid #ccc;
+	white-space: nowrap;
+}
+
+th.bz-view-th {
+	text-align: left;
+	background-color: #f7f7f7;
+	color: #3b3a3a;
+	padding: 0 0 0 15px;
+}
+
+td.bz-view-td {
+	padding: 30px 18px;
+}
+
+
+caption.bz-view-catiption {
+	padding: 10px;
+	font-weight: bold;
+	color: blue;
+}

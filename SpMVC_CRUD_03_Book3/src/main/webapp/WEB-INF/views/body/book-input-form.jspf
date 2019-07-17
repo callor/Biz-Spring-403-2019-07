@@ -1,0 +1,59 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<c:set var="rootPath" value="${pageContext.request.contextPath}" />
+<script src="${rootPath}/js/book-input.js?ver=2019071701"></script>
+<form method="POST">
+	<fieldset>
+		<legend>도서정보 입력</legend>
+		<input type="hidden" 
+			name="b_seq" 
+			value="<c:out value='${BOOK.b_seq}' default='0'/>" >
+			
+		<div class="in-box">
+			<label for="b_title">도서명</label> 
+			<input type="text"
+				name="b_title" id="b_title"
+				value="${BOOK.b_title}">
+		</div>
+		<div class="in-box">
+			<label for="b_comp">출판사</label> 
+			<input type="text"
+				name="b_comp" id="b_comp"
+				value="${BOOK.b_comp}">
+		</div>
+		<div class="in-box">
+			<label for="b_auth">저자</label> 
+			<input type="text" 
+				name="b_auth" id="b_auth"
+				value="${BOOK.b_auth}">
+		</div>
+		<div class="in-box">
+			<label for="b_price">가격</label> 
+			<input type="text" 
+				name="b_price" id="b_price"
+				value="${BOOK.b_price}">
+		</div>
+
+		<div class="btn-box center">
+			<!-- 
+				button의 type
+				submit(지정하지 않을때) : 
+						버튼을 클릭하면 
+						form-input box에 담긴 값을 server 전송
+				reset : form-input box에 타이핑입력한 값을 제거
+				button : 아무일도 하지 마라
+			 -->
+			<button type="button" 
+					id="btn-save" class="bz-btn save">저장</button>
+			<button type="reset" 
+					class="bz-btn reset">다시작성</button>
+			<button type="button" 
+					id="btn-list" class="bz-btn list">목록으로</button>
+		
+		</div>
+	</fieldset>
+</form>
+
+
+

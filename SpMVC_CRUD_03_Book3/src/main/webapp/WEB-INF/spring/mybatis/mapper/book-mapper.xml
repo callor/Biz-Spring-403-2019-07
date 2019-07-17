@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.biz.book.dao.BookDao">
+
+  <select id="selectAll" resultType="BookVO">
+    	SELECT * FROM tbl_books ORDER BY b_seq
+  </select>
+  
+  <select id="findBySeq" parameterType="Long"
+  				resultType="BookVO">
+  		SELECT * FROM tbl_books WHERE b_seq = #{b_seq}				
+  </select>
+  
+  <insert id="insert" parameterType="BookVO">
+  
+	  	INSERT INTO tbl_books (
+		  	B_SEQ,
+			B_TITLE,
+			B_COMP,
+			B_AUTH,
+			B_PRICE
+	  	) VALUES (
+		  	SEQ_BOOK.NEXTVAL,
+			#{b_title},
+			#{b_comp},
+			#{b_auth},
+			#{b_price}
+	  	)
+  
+  	</insert>
+  	
+  	<update id="update" parameterType="BookVO">
+	  	UPDATE tbl_books SET 
+			B_TITLE = #{b_title},
+			B_COMP = #{b_comp},
+			B_AUTH = #{b_auth},
+			B_PRICE = #{b_price}
+		WHERE B_SEQ = #{b_seq}			
+  	</update>
+
+	<delete id="delete" parameterType="Long">
+		DELETE FROM tbl_books WHERE b_seq = #{b_seq}
+	</delete>
+
+</mapper>
