@@ -1,3 +1,7 @@
+pom.xml의 java를 1.8로 변경하고
+spring framework 의 버전을 5.x 이상으로 변경 한후
+web.xml의 스키마를 아래와 같이 변경하세요
+
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns="http://xmlns.jcp.org/xml/ns/javaee"
 	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
