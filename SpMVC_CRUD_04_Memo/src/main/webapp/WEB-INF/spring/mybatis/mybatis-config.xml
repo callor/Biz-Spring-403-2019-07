@@ -4,6 +4,7 @@
   "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
 	<typeAliases>
-		<typeAlias alias="MemoVO" type="com.biz.model.MemoVO"/>	
+		<typeAlias alias="MemoVO" 
+					type="com.biz.memo.model.MemoVO"/>	
 	</typeAliases>
 </configuration>
