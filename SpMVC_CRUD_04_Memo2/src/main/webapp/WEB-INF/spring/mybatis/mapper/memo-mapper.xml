@@ -23,14 +23,16 @@
 			mo_time,
 			mo_auth,
 			mo_subject,
-			mo_memo
+			mo_memo,
+			mo_file
 		) VALUES (
 			#{mo_seq,jdbcType=INTEGER},
 			#{mo_date,jdbcType=VARCHAR},
 			#{mo_time,jdbcType=VARCHAR},
 			#{mo_auth,jdbcType=VARCHAR},
 			#{mo_subject,jdbcType=NVARCHAR},
-			#{mo_memo,jdbcType=VARCHAR}
+			#{mo_memo,jdbcType=VARCHAR},
+			#{mo_file,jdbcType=VARCHAR}
 		)
 	</insert>
 	
@@ -40,7 +42,9 @@
 			mo_time = #{mo_time},
 			mo_auth = #{mo_auth},
 			mo_subject = #{mo_subject},
-			mo_memo = #{mo_memo}
+			mo_memo = #{mo_memo},
+			mo_file = #{mo_file}
+			
 		WHERE mo_seq = #{mo_seq}
 	</update>
 	

@@ -5,7 +5,7 @@
 
 <script src="${rootPath}/js/book-input.js?ver=2019071701"></script>
 
-<form method="POST">
+<form method="POST" enctype="multipart/form-data">
 	<fieldset>
 		<legend>메모작성 </legend>
 		
@@ -35,6 +35,14 @@
 			<textarea rows="10" 
 					id="mo_memo" 
 					name="mo_memo">${MEMO.mo_memo}</textarea>
+		</div>
+		
+		<div class="in-box">
+			<label></label>
+			<!-- accept= image/jpg,image/jpeg,image/png,image/gif -->
+			<input type="file" name="m_file" 
+					accept=".png,.jpg,.jpeg,.gif">
+			
 		</div>
 
 		<div class="btn-box center">

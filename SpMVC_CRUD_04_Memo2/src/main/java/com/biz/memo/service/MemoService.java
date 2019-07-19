@@ -12,7 +12,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.biz.memo.controller.MemoController;
 import com.biz.memo.dao.MemoDao;
 import com.biz.memo.model.MemoVO;
 
@@ -127,6 +126,8 @@ public class MemoService {
 		int ret = mDao.update(memoVO);
 		return 0;
 	}
+
+
 
 }
 

@@ -41,6 +41,18 @@
 	<tr>
 		<td colspan="4" class="bz-view-td">${MEMO.mo_memo}</td>
 	</tr>
+	<c:if test="${!empty MEMO.mo_file}">
+		<tr>
+			<td colspan="4" class="bz-view-td">
+				<a href="${rootPath}/resources/upload/${MEMO.mo_file}" 
+					target="_new"><img 
+					src="${rootPath}/resources/upload/${MEMO.mo_file}"	
+					width="100%"></a>
+			</td>
+		</tr>
+	</c:if>
+	
+	
 	
 </table>
 <div class="btn-box center">
