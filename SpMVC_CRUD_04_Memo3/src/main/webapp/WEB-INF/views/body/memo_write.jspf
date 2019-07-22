@@ -1,0 +1,61 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<c:set var="rootPath" value="${pageContext.request.contextPath}" />
+
+<script src="${rootPath}/js/book-input.js?ver=2019071701"></script>
+
+<form method="POST" enctype="multipart/form-data">
+	<fieldset>
+		<legend>메모작성 </legend>
+		
+		<!-- 
+			update할때 DB에 저장되어서 vo에 담겨 전달된
+			날짜와 시각을 임시 저장소에 보관하고 있다가
+			다시 서버로 보내주어야 한다.
+		 -->
+		<input type="hidden" name="mo_date" value="${MEMO.mo_date}">
+		<input type="hidden" name="mo_time" value="${MEMO.mo_time}">
+		
+		<div class="in-box">
+			<label for="mo_auth">작성자</label> 
+			<input type="text" 
+				name="mo_auth" id="mo_auth"
+				value="<c:out value='${MEMO.mo_auth}' default='${USER.m_name}' />"  />
+		</div>
+		<div class="in-box">
+			<label for="mo_subject">제목</label> 
+			<input type="text" 
+				name="mo_subject" id="mo_subject"
+				value="${MEMO.mo_subject}">
+		</div>
+
+		<div class="in-box">
+			<label></label>
+			<textarea rows="10" 
+					id="mo_memo" 
+					name="mo_memo">${MEMO.mo_memo}</textarea>
+		</div>
+		
+		<div class="in-box">
+			<label></label>
+			<!-- accept= image/jpg,image/jpeg,image/png,image/gif -->
+			<input type="file" name="m_file" 
+					accept=".png,.jpg,.jpeg,.gif">
+			
+		</div>
+
+		<div class="btn-box center">
+			<button type="submit" 
+					id="btn-save" class="bz-btn save">저장</button>
+			<button type="reset" 
+					class="bz-btn reset">다시작성</button>
+			<button type="button" 
+					id="btn-list" class="bz-btn list">목록으로</button>
+		
+		</div>
+	</fieldset>
+</form>
+
+
+    

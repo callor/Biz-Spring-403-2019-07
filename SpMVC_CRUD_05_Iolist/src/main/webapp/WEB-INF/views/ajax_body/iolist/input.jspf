@@ -1,0 +1,39 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+
+<style>
+	fieldset {
+		width:100%;
+	}
+	
+	input[type='radio'] {
+		width:50px;
+	}
+
+</style>
+<form>
+	<fieldset>
+		<legend>매입매출</legend>
+		<div class="in-box">
+			<input type="text" id="io_pcode" name="io_pcode" 
+					placeholder="상품코드">		
+			<span id="p_name"></span>
+		</div>
+		<div class="in-box">
+			<input type="radio" value="1" id="io_inout" 
+					name="io_inout">매입
+			<input type="radio" value="2" id="io_inout" 
+					name="io_inout">매출	
+		</div>
+		<div class="in-box">
+			<input type="text" id="io_qty" name="io_qty">		
+		</div>
+
+
+	
+	
+	</fieldset>
+
+</form>    
+    
+    

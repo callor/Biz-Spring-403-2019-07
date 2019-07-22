@@ -1,0 +1,31 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix="c" %>    
+
+<script>
+$(function(){
+	
+	$("#pro_name").keypress(function(event){
+		if(event.keyCode == 13) { // Enter를 누르면
+			let pro_name = $(this).val()
+			$.ajax({
+				url : '${rootPath}/product/list?p_name=' + pro_name,
+				method:'GET'				
+			})
+			.done(function(result){
+				$("#pro_list").html(result)
+			})
+		}
+	})
+})
+
+</script>
+<div class="in-box">
+<input type="text" name="pro_name" id="pro_name" 
+		placeholder="상품명을 입력후 Enter..." >
+
+</div>
+
+<div id="pro_list">
+</div>
+		

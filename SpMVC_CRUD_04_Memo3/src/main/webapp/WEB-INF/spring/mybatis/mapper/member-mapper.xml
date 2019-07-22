@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.biz.memo.dao.MemberDao">
+
+	<select id="findByUserId" resultType="MVO">
+		SELECT * FROM tbl_member WHERE m_userid = #{m_userid}
+	</select>
+	
+	<select id="login" resultType="MVO" parameterType="MVO">
+		SELECT * 
+		FROM tbl_member 
+		WHERE m_userid = #{m_userid} AND m_password = #{m_password}
+	</select>
+
+</mapper>

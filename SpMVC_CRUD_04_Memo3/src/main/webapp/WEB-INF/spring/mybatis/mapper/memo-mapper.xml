@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.biz.memo.dao.MemoDao">
+
+	<select id="selectAll" resultType="MemoVO">
+		SELECT * FROM tbl_memo ORDER BY mo_date DESC, mo_time DESC
+	</select>
+	
+	<select id="findBySeq" resultType="MemoVO">
+		SELECT * FROM tbl_memo WHERE mo_seq = #{mo_seq}
+	</select>
+	
+	<insert id="insert" parameterType="MemoVO">
+		<selectKey keyProperty="mo_seq" resultType="Long" order="BEFORE">
+			SELECT ROUND(DBMS_RANDOM.VALUE(0,999999999999),0) FROM DUAL
+		</selectKey>
+		INSERT INTO tbl_memo (
+			mo_seq,
+			mo_date,
+			mo_time,
+			mo_auth,
+			mo_subject,
+			mo_memo,
+			mo_file
+		) VALUES (
+			#{mo_seq,jdbcType=INTEGER},
+			#{mo_date,jdbcType=VARCHAR},
+			#{mo_time,jdbcType=VARCHAR},
+			#{mo_auth,jdbcType=VARCHAR},
+			#{mo_subject,jdbcType=NVARCHAR},
+			#{mo_memo,jdbcType=VARCHAR},
+			#{mo_file,jdbcType=VARCHAR}
+		)
+	</insert>
+	
+	<update id="update" parameterType="MemoVO">
+		UPDATE tbl_memo SET 
+			mo_date = #{mo_date},
+			mo_time = #{mo_time},
+			mo_auth = #{mo_auth},
+			mo_subject = #{mo_subject},
+			mo_memo = #{mo_memo},
+			mo_file = #{mo_file}
+			
+		WHERE mo_seq = #{mo_seq}
+	</update>
+	
+	<delete id="delete">
+		DELETE FROM tbl_memo WHERE mo_seq = #{mo_seq}
+	</delete>
+
+</mapper>

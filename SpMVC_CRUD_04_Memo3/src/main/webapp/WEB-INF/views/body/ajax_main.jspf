@@ -1,0 +1,53 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+
+<script>
+	$(function() {
+		
+		// JSON
+		// JS Object notation 
+		// JS에서 사용하는 특별한 자료 구조
+		// 거의 대부분의 프로그래밍 언어에서 지원하는 자료 구조가 되었다.
+		// WAS 환경에서 데이터를 주고받는 표준적인 자료 구조가 되었다.
+		var myJSON = {
+					  num1 : 33,
+					  num2 : 44,
+					  num3 : 55,
+					  name1 : "홍길동",
+					  name2 : '성춘향',
+					  name3 : '이몽룡'}
+		
+		$("#btn-ajax1").click(function(){
+			let sum = myJSON.num1 + myJSON.num2 + myJSON.num3
+			alert(myJSON.name3)
+			alert("합계:"  + sum)
+		})
+		
+		$("#btn-ajax").click(function() {
+			// jquery 버전에 관계없이 사용하는 ajax 구문
+			/*
+			$.ajax({
+				url : "${rootPath}/resources/ajax-text.txt",
+				method : "GET"
+			}).done(function(result) {
+				$("#text").html(result)
+			})
+			*/
+			
+			// jquery 3.x 이상에서 사용되는 GET 방식의 ajax 구분
+			$.get("${rootPath}/resources/ajax-text.txt",function(result){
+				$("#text").html(result)
+			})
+			
+			
+		})
+	})
+</script>
+<article>
+    <button id="btn-ajax">클릭하세요</button>
+    <div id="text">
+  
+    </div>
+    
+    <button id="btn-ajax1">클릭하세요</button>
+</article>
