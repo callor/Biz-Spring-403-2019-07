@@ -1,0 +1,86 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<c:set var="rootPath" value="${pageContext.request.contextPath}" />
+
+<style>
+	fieldset {
+		width:90%;
+	}
+	
+	div.in-box #io_inout {
+		width:10px;
+	}
+	
+	div.in-box #io_pcode, div.in-box #io_ccode {
+		width:50px;
+	}
+	
+	span#c_name {
+		display: inline-block;
+		width:200px;
+		
+		overflow: hidden;
+		white-space: nowrap;
+		text-overflow: ellipsis;
+	}
+	
+</style>
+
+<script>
+	// EL tag의 변수를 js 변수로 하나를 생성
+	var rootPath = "${rootPath}"
+</script>
+<script src="${rootPath}/resources/js/iolist_input.js?ver=20190723"></script>
+
+<form>
+	<fieldset>
+		<legend>매입매출</legend>
+		<div class="in-box">
+			<input type="date" id="io_date" name="io_date">		
+		</div>
+
+		<div class="in-box">
+			<input type="radio" value="1" id="io_inout" 
+					name="io_inout">매입
+			<input type="radio" value="2" id="io_inout" 
+					name="io_inout">매출	
+		</div>
+
+		<div class="in-box">
+			<input type="text" id="io_ccode" name="io_ccode" 
+					placeholder="거래처코드">		
+			<span id="c_name"></span>
+		</div>
+
+		<div class="in-box">
+			<input type="text" id="io_pcode" name="io_pcode" 
+					placeholder="상품코드">		
+			<span id="p_name"></span>
+		</div>
+
+		<div class="in-box">
+			<input type="text" id="io_price" name="io_price" 
+					placeholder="단가">		
+		</div>
+		
+		<div class="in-box">
+			<input type="text" id="io_qty" name="io_qty" 
+					placeholder="수량">		
+		</div>
+		
+		<div class="in-box">
+			<input type="text" id="io_total" name="io_total" 
+					placeholder="합계">		
+		</div>
+		
+		<div class="btn-box">
+			<button type="button" 
+							id="btn-save" 
+							class="bz-btn save">저장</button>
+		</div>
+	</fieldset>
+
+</form>    
+    
+    

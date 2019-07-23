@@ -1,0 +1,68 @@
+@charset "UTF-8";
+
+div.btn-box {
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
+}
+
+div.btn-box.center {
+	justify-content: center;
+}
+
+
+/* 버튼의 크기와 여백 등 공통부분 지정 */
+button.bz-btn {
+	display: inline-block;
+	padding:5px 20px;
+	font-size: 16px;
+	margin:4px 2px;
+	cursor: pointer;
+	text-align: center;
+	border-radius: 5px;
+	transition-duration : 0.5s
+}
+
+/* 클래스별로 별도 값을 지정 */
+button.bz-btn.input {
+	background-color: green;
+	border: 2px solid green;
+	color:white;
+}
+
+button.bz-btn.save {
+	background-color: blue;
+	border: 2px solid blue;
+	color:white;
+}
+
+button.bz-btn.reset {
+	background-color: orange;
+	border: 2px solid orange;
+	color:white;
+}
+
+button.bz-btn.list {
+	background-color: cyan;
+	border: 2px solid cyan;
+	color:white;
+}
+
+button.bz-btn.delete {
+	background-color: red;
+	border: 2px solid red;
+	color:white;
+}
+
+
+
+/* 공통 hover */
+button.bz-btn:hover {
+	background-color: white;
+	color:blue;
+	font-weight:bold;
+	border:2px solid blue;
+	box-shadow: 10px 10px 10px gray;
+}
+
+
