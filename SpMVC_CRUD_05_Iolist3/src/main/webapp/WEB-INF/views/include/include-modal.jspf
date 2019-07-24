@@ -1,0 +1,116 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
+<style>
+
+div.modal-main {
+	position: fixed;
+	top:0;
+	left:0;
+	
+	width:100%;
+	height: 100%;
+	
+	overflow: auto;
+	
+	background-color: rgba(0,0,0,0.4);
+	z-index: 1;
+	padding-top:100px;
+	
+	display: none;
+
+}
+div.modal-content {
+	position: relative;
+	margin:auto;
+	padding:0;
+	border: 1px solid #888;
+	
+	box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),
+			0 6px 20px 0 rgba(0,0,0,0.9);
+
+	background-color: #fefefe;
+	width:80%;
+	
+	animation-name : aniTop;
+	animation-duration : 0.8s;
+
+	-webkit-animation-name : aniTop;
+	-webkit-animation-duration : 0.8s;
+
+}
+
+/* css 에니메이션을 구현하기 위한 기본 설정*/
+@keyframes aniTop {
+	from { 
+		top:-300px;
+		opacity: 0;
+	}
+	to {
+		top : 0;
+		opacity: 1;
+	}
+}
+
+@-webkit-keyframes aniTop {
+	from { 
+		top:-300px;
+		opacity: 0;
+	}
+	to {
+		top : 100px;
+		opacity: 1;
+	}
+}
+
+
+
+span.modal-close {
+	color:white;
+	float:right;
+	font-size:28px;
+	font-weight: bold;
+}
+
+span.modal-close:hover, span.modal-close:focus {
+	color:#000;
+	text-decoration: none;
+	cursor: pointer;
+
+}
+
+div.modal-body {
+	padding:1px 16px;
+}
+
+div.modal-header, div.modal-footer {
+	padding:2px 16px;
+	background-color: #5CB85C;
+	color:white;
+}
+
+</style>
+<script>
+$(function(){
+	$(".modal-close").click(function(){
+		$("#modal-box").css("display","none")
+	})
+})
+
+</script>
+<div id="modal-box" class="modal-main">
+	<div class="modal-content">
+		<div class="modal-header">
+			<span class="modal-close">&times;</span>
+			<h2>Header</h2>		
+		</div>
+		<div class="modal-body" id="modal-body">
+		
+		</div>
+		<div class="modal-footer">
+			<h3>footer</h3>
+		</div>
+	</div>
+</div>    
+
