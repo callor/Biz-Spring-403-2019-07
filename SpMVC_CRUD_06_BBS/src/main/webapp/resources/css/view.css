@@ -7,26 +7,26 @@ table.bz-view-table {
 	border-bottom: 1px solid #ccc;
 }
 
-th.bz-view-th,th.bz-view-td {
+ table.bz-view-table th, table.bz-view-table td{
 	width:15%;
 	border-top: 1px solid #ccc;
 	border-bottom: 1px solid #ccc;
 	white-space: nowrap;
 }
 
-th.bz-view-th {
+table.bz-view-table th {
 	text-align: left;
 	background-color: #f7f7f7;
 	color: #3b3a3a;
 	padding: 0 0 0 15px;
 }
 
-td.bz-view-td {
+table.bz-view-table td {
 	padding: 30px 18px;
 }
 
 
-caption.bz-view-catiption {
+table.bz-view-table caption {
 	padding: 10px;
 	font-weight: bold;
 	color: blue;

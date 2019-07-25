@@ -1,0 +1,28 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+    
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions"  prefix="fn"%>
+<% 
+	pageContext.setAttribute("w_newLine", "\r\n");
+	pageContext.setAttribute("u_newLine", "\n");
+%>
+    
+
+<table class="bz-view-table">
+	<caption>게시판 본문</caption>
+	<tr>
+		<th>작성시각</th>
+		<td>${BBS.bbs_date}&nbsp;&nbsp;${BBS.bbs_time}</td>
+		
+		<th>작성자</th>
+		<td>${BBS.bbs_auth}</td>
+	</tr>
+	<tr>
+		<th>제목</th>
+		<td>${BBS.bbs_title}</td>
+	</tr>
+	<tr>
+		<th>내용</th>
+		<td>${fn:replace(fn:replace(BBS.bbs_content,w_newLine,"<br/>"),u_newLine,"<br/>")}
+	</tr>
+</table>

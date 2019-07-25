@@ -10,6 +10,10 @@ div.btn-box.center {
 	justify-content: center;
 }
 
+div.btn-box.right {
+	justify-content: flex-end;
+}
+
 
 /* 버튼의 크기와 여백 등 공통부분 지정 */
 button.bz-btn {

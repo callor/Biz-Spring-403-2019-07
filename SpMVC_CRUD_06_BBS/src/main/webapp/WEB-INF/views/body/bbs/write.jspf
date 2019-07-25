@@ -1,0 +1,46 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core"  prefix="c" %>
+<%@ taglib 
+		uri="http://www.springframework.org/tags/form" 
+		prefix="form" %>
+    
+<form:form modelAttribute="bbsVO" method="POST"
+				enctype="multipart/form-data">
+				
+	<div class="in-box">
+		<label for="bbs_date">작성일자</label>
+		<form:input type="date" id="bbs_date" path="bbs_date" /><br/>
+		<form:errors path="bbs_date" />
+	</div>
+	
+	<div class="in-box">
+		<label for="bbs_time">작성시각</label>
+		<form:input type="text" id="bbs_time" path="bbs_time" />
+		<form:errors path="bbs_time" />
+	</div>
+	<div class="in-box">
+		<label for="bbs_auth">작성자</label>
+		<form:input type="text" id="bbs_auth" path="bbs_auth" />
+		<form:errors path="bbs_auth" />
+	</div>
+	<div class="in-box">
+		<label for="bbs_title">제목</label>
+		<form:input type="text" id="bbs_title" path="bbs_title" />
+		<form:errors path="bbs_title" />
+	</div>
+	<div class="in-box">
+		<label for="bbs_content">내용</label>
+		<form:textarea id="bbs_content" rows="10" path="bbs_content" />
+	</div>
+
+	<div class="in-box">
+		<label for="bbs_content"></label>
+		<input type="file" accept ="image" multiple="multiple" 
+				id="bbs_file_1" name="bbs_file" />
+	</div>
+
+	<div class="btn-box center">
+		<button class="bz-btn save">저장</button>
+	</div>
+</form:form>    
