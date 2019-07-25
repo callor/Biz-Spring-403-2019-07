@@ -16,7 +16,8 @@ public interface BBsDao {
 	
 	@InsertProvider(type=BBsSQL.class,method="bbs_insert_sql")
 	@SelectKey(keyProperty = "bbs_seq",
-				resultType = "long",
+		statement = " SELECT SEQ_BBS.NEXTVAL FROM DUAL ",
+				resultType = Long.class,
 				before = true)
 	public int insert(BBsVO bbsVO);
 
