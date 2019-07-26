@@ -19,6 +19,8 @@ public class FileService {
 	
 	@Autowired
 	FileDao fDao;
+	
+	private String upLoadFolder = "c:/bizwork/upload/";
 
 	/*
 	 * 파일들의 이름을 UUID 이름으로 변경하고
@@ -45,7 +47,7 @@ public class FileService {
 	
 	public List<FileVO> getFileList(BBsVO bbsVO) {
 		
-		String upLoadFolder = "c:/bizwork/upload/";
+		
 		
 		List<MultipartFile> files = bbsVO.getBbs_files();
 		long bbs_seq = bbsVO.getBbs_seq();
@@ -82,6 +84,31 @@ public class FileService {
 		for(FileVO fileVO : files) {
 			fDao.insert(fileVO);
 		}
+	}
+
+	public boolean file_delete(long file_seq) {
+
+		//1. 파일 정보 추출
+		FileVO fileVO = fDao.findBySeq(file_seq);
+		
+		//2. 파일의 물리적 경로 생성
+		File delFile = new File(upLoadFolder, fileVO.getFile_name());
+		
+		// 3. 파일이 있는지 확인 한 후
+		if(delFile.exists()) {
+			
+			// 4. 파일 삭제
+			delFile.delete();
+			
+			// 5. DB 정보 삭제
+			fDao.delete(file_seq);
+		
+			return true;
+		}
+		
+		return false;
+		
+		
 	}
 	
 

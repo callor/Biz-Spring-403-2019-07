@@ -8,6 +8,7 @@ import org.apache.ibatis.annotations.Result;
 import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.SelectKey;
+import org.apache.ibatis.annotations.UpdateProvider;
 
 import com.biz.bbs.model.BBsDto;
 import com.biz.bbs.model.BBsVO;
@@ -37,6 +38,20 @@ public interface BBsDao {
 	public BBsVO findBySeq(long bbs_seq);
 
 	// file List까지 묶어서 확인을 위한 select
+	@Select(" SELECT * FROM tbl_bbs ORDER BY bbs_date DESC, bbs_time DESC ")
+	@Results(
+			value= {
+				@Result(property = "bbs_seq", column = "bbs_seq"),
+				@Result(property = "bbs_files",
+						column = "bbs_seq",
+						javaType=List.class,
+						many=@Many(select = "getFileList"))
+			}
+	)
+	public List<BBsDto> selectAllForFile() ;
+
+		
+	// file List까지 묶어서 확인을 위한 select
 	@Select(" SELECT * FROM tbl_bbs WHERE bbs_seq = #{bbs_seq} ")
 	@Results(
 			value= {
@@ -52,9 +67,9 @@ public interface BBsDao {
 	@Select(" SELECT * FROM tbl_bbs_file " 
 			+  "WHERE file_bbs_seq = #{bbs_seq}")
 	public List<FileVO> getFileList(long bbs_seq);
-	
-	
 
+	@UpdateProvider(type=BBsSQL.class,method="bbs_update_sql")
+	public int update(BBsVO bbsVO);
 	
 	
 }

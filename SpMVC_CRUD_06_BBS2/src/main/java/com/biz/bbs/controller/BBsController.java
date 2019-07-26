@@ -11,10 +11,12 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.biz.bbs.model.BBsDto;
 import com.biz.bbs.model.BBsVO;
 import com.biz.bbs.service.BBsService;
+import com.biz.bbs.service.FileService;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -25,6 +27,9 @@ public class BBsController {
 
 	@Autowired
 	BBsService bbsService;
+	
+	@Autowired
+	FileService fileService;
 
 	/*
 	 * 현재의 controller내의 어떤 메서드에서
@@ -51,7 +56,7 @@ public class BBsController {
 	@RequestMapping(value="/album",method=RequestMethod.GET)
 	public String album(Model model) {
 		
-		List<BBsVO> bbsList = bbsService.bbsList();
+		List<BBsDto> bbsList = bbsService.bbsListForFile();
 		
 		model.addAttribute("LIST",bbsList);
 		model.addAttribute("BODY","BBS_ALBUM");
@@ -97,7 +102,7 @@ public class BBsController {
 //		}
 		
 		int ret = bbsService.insert(bbsVO);
-		return "redirect:/bbs";
+		return "redirect:/bbs/list";
 	
 	}
 	
@@ -115,5 +120,40 @@ public class BBsController {
 		return "home";
 		
 	}
+	
+	
+	@RequestMapping(value="/update",method=RequestMethod.GET)
+	public String update(
+			@RequestParam long bbs_seq, 
+			Model model) {
+		
+		BBsDto bbsDto = bbsService.getContent(bbs_seq);
+		model.addAttribute("bbsVO",bbsDto);
+		model.addAttribute("BODY","BBS_WRITE");
+		return "home";
+		
+	}
+	
+	
+	@RequestMapping(value="/update",method = RequestMethod.POST)
+	public String update(
+			@ModelAttribute BBsVO bbsVO,
+			Model model) {
+		
+		int ret  = bbsService.update(bbsVO);
+		return "redirect:/bbs/list";
+		
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="/file_delete")
+	public String file_delete(long file_seq) {
+		
+		boolean okDelete = fileService.file_delete(file_seq);
+		if(okDelete) return "OK";
+		else return "FAIL";
+
+	}
+
 		
 }

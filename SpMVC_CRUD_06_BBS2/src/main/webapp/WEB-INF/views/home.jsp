@@ -21,6 +21,9 @@
 		href="${rootPath}/resources/css/view.css?ver=20190726">
 <link rel="stylesheet" type="text/css" 
 		href="${rootPath}/resources/css/login.css?ver=20190719">
+<link rel="stylesheet" type="text/css" 
+		href="${rootPath}/resources/css/album.css?ver=20190726">
+
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 

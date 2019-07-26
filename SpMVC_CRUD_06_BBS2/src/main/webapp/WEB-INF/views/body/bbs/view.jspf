@@ -61,5 +61,21 @@
 			</td>
 		</tr>
 	</c:if>
-	
 </table>
+<script>
+$(function(){
+	
+	$("#btn-delete").click(function(){
+		if(confirm("정말 삭제 할까요?")) {
+			location.replace('${rootPath}/bbs/delete?bbs_seq=${BBS.bbs_seq}')	
+		}
+	})
+})
+
+</script>
+<div class="btn-box center">
+	<button 
+		onclick="location.href='${rootPath}/bbs/update?bbs_seq=${BBS.bbs_seq}'"
+		class="bz-btn update">수정</button>
+	<button id="btn-delete" class="bz-btn delete">삭제</button>
+</div>

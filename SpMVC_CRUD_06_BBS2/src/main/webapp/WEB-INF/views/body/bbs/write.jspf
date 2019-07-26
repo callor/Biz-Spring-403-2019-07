@@ -4,6 +4,37 @@
 <%@ taglib 
 		uri="http://www.springframework.org/tags/form" 
 		prefix="form" %>
+<script>
+$(function(){
+
+	$(".image-item").click(function(){
+		
+		let file_seq = $(this).attr("data-seq")
+		
+		if(confirm("이미지를 삭제할까요?")) {
+			$.ajax({
+				url : '${rootPath}/bbs/file_delete?file_seq=' + file_seq,
+				method : 'GET'
+			})
+			.done(function(result){
+				if(result == "OK") {
+					alert(result)
+					$(this).remove()
+					$(this).attr("src","")
+				} else if(result == "FAIL") {
+					alert("파일을 삭제할수 없습니다")
+				}
+			})
+			.fail(function(){
+				alert("서버 오류 발생")
+			})
+		}
+	})
+	
+})
+
+
+</script>
    
 <fieldset>    
 <form:form modelAttribute="bbsVO" method="POST"
@@ -40,6 +71,19 @@
 		<input type="file" accept ="image" multiple="multiple" 
 				id="bbs_files" name="bbs_files" />
 	</div>
+
+	<c:if test="${not empty bbsVO.bbs_files}">
+		<div class="in-box">
+			<label for="bbs_content"></label>
+			<c:forEach items="${bbsVO.bbs_files}" var="file">
+				<img class="image-item" 
+					data-seq="${file.file_seq}" 
+					src="${rootPath}/images/${file.file_name}" 
+					width="100px">
+			</c:forEach>
+		</div>
+	</c:if>
+	
 	<div class="btn-box center">
 		<button class="bz-btn save">저장</button>
 	</div>

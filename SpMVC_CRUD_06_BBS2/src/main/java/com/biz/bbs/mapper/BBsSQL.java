@@ -21,13 +21,24 @@ public class BBsSQL {
 			
 	}};
 		
-		
-		
-		
-		
-		
 		return sql.toString();		
 				
 	}
 	
+	public String bbs_update_sql() {
+		
+		SQL sql = new SQL() {{
+			
+			UPDATE("tbl_bbs");
+			SET("bbs_date = #{bbs_date}");
+			SET("bbs_time = #{bbs_time} ");
+			SET("bbs_title = #{bbs_title}");
+			SET("bbs_content = #{bbs_content}");
+			SET("bbs_auth = #{bbs_auth}");
+			WHERE("bbs_seq = #{bbs_seq}");
+			
+		}};
+		
+		return sql.toString();
+	}
 }
