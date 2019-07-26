@@ -1,0 +1,58 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
+<!-- 
+	NO
+	제목
+	작성자
+	작성일자
+	작성시각
+	조회수
+ -->
+<script>
+ $(function(){
+	$(".bbs-row").click(function(){
+		let bbs_seq = $(this).attr("data-seq")
+		location.href="${rootPath}/bbs/view?bbs_seq=" + bbs_seq
+	})
+ })
+ 
+</script>
+<table class="list">
+ 	<tr>
+		<th>NO</th>
+		<th>제목</th>
+		<th>작성자</th>
+		<th>작성일자</th>
+		<th>작성시각</th>
+		<th>조회수</th>
+	</tr>
+	<c:choose>
+		<c:when test="${empty LIST}">
+			<tr><td colspan="6"	>데이터가 없습니다</td>	
+		</c:when>
+		<c:otherwise>
+			<c:forEach items="${LIST}" var="VO" varStatus="s">
+				<tr class="bbs-row" data-seq="${VO.bbs_seq}">
+					<td>${VO.bbs_seq}</td>
+					<td>${VO.bbs_title}</td>
+					<td>${VO.bbs_auth}</td>
+					<td>${VO.bbs_date}</td>
+					<td>${VO.bbs_time}</td>
+					<td></td>
+				</tr>								
+			</c:forEach>
+		</c:otherwise>
+	</c:choose>
+ </table>
+ <!-- inline style 지정방식 -->
+ <div class="btn-box right" style="padding-right:25px;">
+ 	<!-- inline script 지정방식 -->
+ 	<button id="btn-input" 
+ 			onclick="location.href='${rootPath}/bbs/write'"
+ 			class="bz-btn input">글쓰기</button>
+ </div>
+ 
+ 
+ 
