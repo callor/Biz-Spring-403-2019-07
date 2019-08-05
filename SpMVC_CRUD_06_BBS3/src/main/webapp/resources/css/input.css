@@ -1,0 +1,47 @@
+@charset "UTF-8";
+
+fieldset {
+	width: 60%;
+	margin: 10px auto;
+	border-radius: 4px;
+	box-sizing: border-box;
+}
+
+legend {
+	font-weight: bold;
+	color: blue;
+}
+
+div.in-box {
+	display: flex;
+	margin: 3px;
+}
+
+div.in-box label {
+	display: block;
+	width: 100px;
+	text-align: right;
+	margin: 8px;
+	padding: 5px;
+	font-weight: bold;
+	color: blue;
+}
+
+div.in-box input, div.in-box textarea {
+	width: 60%;
+	border: 1px solid red;
+	border-radius: 4px;
+	padding: 5px;
+	margin: 3px;
+}
+
+div.in-box input:focus {
+	background-color: lightblue;
+}
+
+div.in-box textarea:focus {
+	background-color: cyan;
+}
+
+
+

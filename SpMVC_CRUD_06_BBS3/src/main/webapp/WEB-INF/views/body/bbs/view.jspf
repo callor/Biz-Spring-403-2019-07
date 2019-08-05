@@ -1,0 +1,81 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>    
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions"  prefix="fn"%>
+<% 
+	pageContext.setAttribute("w_newLine", "\r\n");
+	pageContext.setAttribute("u_newLine", "\n");
+%>
+<style>
+	div.thumn-container {
+		width:100%;
+		display: flex;
+		border:1px solid red;
+		flex-flow: wrap;
+	}
+	
+	div.thumn-box {
+		flex: 0 1 auto;
+		
+		width:100px;
+		height:100px;
+		
+		margin:5px;
+		border : 1px solid blue;
+		overflow: hidden;
+	}
+	
+	div.thumn-box img {
+		width: 100%;
+	}
+</style>
+<table class="bz-view-table">
+	<caption>게시판 본문</caption>
+	<tr>
+		<th>작성시각</th>
+		<td>${BBS.bbs_date}&nbsp;&nbsp;${BBS.bbs_time}</td>
+		
+		<th>작성자</th>
+		<td>${BBS.bbs_auth}</td>
+	</tr>
+	<tr>
+		<th>제목</th>
+		<td colspan="3">${BBS.bbs_title}</td>
+	</tr>
+	<tr>
+		<th>내용</th>
+		<td colspan="3">${fn:replace(fn:replace(BBS.bbs_content,w_newLine,"<br/>"),u_newLine,"<br/>")}
+	</tr>
+	<c:if test="${!empty BBS.bbs_files}" >
+		<tr>
+			<th>파일</th>
+			<td colspan="3">
+				<div class="thumn-container">
+					<c:forEach items="${BBS.bbs_files}" var="file">
+						<div class="thumn-box">
+						<img src="${rootPath}/images/${file.file_name}"  
+						alt="${file.file_name}" >
+						</div>			
+					</c:forEach>
+				</div>
+			</td>
+		</tr>
+	</c:if>
+</table>
+<script>
+$(function(){
+	
+	$("#btn-delete").click(function(){
+		if(confirm("정말 삭제 할까요?")) {
+			location.replace('${rootPath}/bbs/delete?bbs_seq=${BBS.bbs_seq}')	
+		}
+	})
+})
+
+</script>
+<div class="btn-box center">
+	<button 
+		onclick="location.href='${rootPath}/bbs/update?bbs_seq=${BBS.bbs_seq}'"
+		class="bz-btn update">수정</button>
+	<button id="btn-delete" class="bz-btn delete">삭제</button>
+</div>

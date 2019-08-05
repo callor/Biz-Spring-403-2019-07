@@ -1,0 +1,94 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core"  prefix="c" %>
+<%@ taglib 
+		uri="http://www.springframework.org/tags/form" 
+		prefix="form" %>
+<script>
+$(function(){
+
+	$(".image-item").click(function(){
+		
+		let file_seq = $(this).attr("data-seq")
+		let file_tag = $(this)
+		
+		if(confirm("이미지를 삭제할까요?")) {
+			$.ajax({
+				url : '${rootPath}/bbs/file_delete?file_seq=' + file_seq,
+				method : 'GET'
+			})
+			.done(function(result){
+				if(result == "OK") {
+					// done에서 this는 대상이 ajax가 되어서
+					// img를 삭제하려고 하는데
+					// 엉뚱한 곳을 가리키게 된다.
+					// $(this).remove()
+					$(file_tag).remove()
+				} else if(result == "FAIL") {
+					alert("파일을 삭제할수 없습니다")
+				}
+			})
+			.fail(function(){
+				alert("서버 오류 발생")
+			})
+		}
+	})
+	
+})
+
+
+</script>
+   
+<fieldset>    
+<form:form modelAttribute="bbsVO" method="POST"
+				enctype="multipart/form-data">
+				
+	<div class="in-box">
+		<label for="bbs_date">작성일자</label>
+		<form:input type="date" id="bbs_date" path="bbs_date" /><br/>
+		<form:errors path="bbs_date" />
+	</div>
+	
+	<div class="in-box">
+		<label for="bbs_time">작성시각</label>
+		<form:input type="text" id="bbs_time" path="bbs_time" />
+		<form:errors path="bbs_time" />
+	</div>
+	<div class="in-box">
+		<label for="bbs_auth">작성자</label>
+		<form:input type="text" id="bbs_auth" path="bbs_auth" />
+		<form:errors path="bbs_auth" />
+	</div>
+	<div class="in-box">
+		<label for="bbs_title">제목</label>
+		<form:input type="text" id="bbs_title" path="bbs_title" />
+		<form:errors path="bbs_title" />
+	</div>
+	<div class="in-box">
+		<label for="bbs_content">내용</label>
+		<form:textarea id="bbs_content" rows="10" path="bbs_content" />
+	</div>
+
+	<div class="in-box">
+		<label for="bbs_content"></label>
+		<input type="file" accept ="image" multiple="multiple" 
+				id="bbs_files" name="bbs_files" />
+	</div>
+
+	<c:if test="${not empty bbsVO.bbs_files}">
+		<div class="in-box">
+			<label for="bbs_content"></label>
+			<c:forEach items="${bbsVO.bbs_files}" var="file">
+				<img class="image-item" 
+					data-seq="${file.file_seq}" 
+					src="${rootPath}/images/${file.file_name}" 
+					width="100px">
+			</c:forEach>
+		</div>
+	</c:if>
+	
+	<div class="btn-box center">
+		<button class="bz-btn save">저장</button>
+	</div>
+</form:form>    
+</fieldset>

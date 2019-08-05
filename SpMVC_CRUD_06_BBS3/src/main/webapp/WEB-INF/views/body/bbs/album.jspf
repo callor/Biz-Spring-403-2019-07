@@ -1,0 +1,25 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<script>
+
+
+</script>
+<article class="grid-container">
+	<%
+	// 임의적인 반복문을 사용하는 forEach
+	// <c:forEach begin="0" end="20" step="1">
+	%>
+	<c:forEach items="${LIST}" var="BBS">
+		<%@ include file="/WEB-INF/views/body/bbs/card.jspf" %>
+	</c:forEach>	
+
+</article>
+
+<div class="btn-box right">
+	<button id="btn-input" 
+	onclick="location.href='${rootPath}/bbs/write'"
+	class="bz-btn input">글쓰기</button>
+</div>
+    
+    
