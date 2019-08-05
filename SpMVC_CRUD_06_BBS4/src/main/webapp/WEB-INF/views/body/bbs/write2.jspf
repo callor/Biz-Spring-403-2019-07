@@ -51,26 +51,22 @@ $(function(){
 		// 클래스
 		let formData = new FormData()
 		
-		for(let i = 0 ; i < files.length ; i++) {
-			formData.append("files",files[i])	
-		}
-		
+		// 업로드할 첫번째 파일1개를 formData 객체에 추가
+		formData.append("file",files[0])
 		$.ajax({
-			url : "${rootPath}/file/files_up",
+			url : "${rootPath}/file/file_up",
 			method : "POST",
 			data:formData,
 			processData:false,
 			contentType:false
 		})
 		.done(function(result) {
-			for(let i = 0 ; i < result.length ;i++) {
-				$(".image_box").append(
-					$("<img/>", {
-						src : "${rootPath}/images/" + result[i].file_name,
-						class:"image"
-					})		
-				)
-			}
+			$(".image_box").append(
+				$("<img/>", {
+					src : "${rootPath}/images/" + result,
+					class:"image"
+				})		
+			)
 		})
 		
 		return false

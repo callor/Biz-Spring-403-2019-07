@@ -9,11 +9,15 @@ import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.biz.bbs.mapper.FileDao;
 import com.biz.bbs.model.BBsVO;
 import com.biz.bbs.model.FileVO;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @Service
 public class FileService {
 	
@@ -63,6 +67,51 @@ public class FileService {
 				e.printStackTrace();
 			}
 		}
+	}
+	
+	public List<FileVO> uploads(MultipartHttpServletRequest files) {
+		List<MultipartFile> fileList = files.getFiles("files");
+		List<FileVO> fileVOList = new ArrayList<FileVO>();
+		
+		for(MultipartFile file : fileList) {
+			log.debug("FILENAME" + file.getOriginalFilename());
+			fileVOList.add(FileVO.builder()
+			.file_origin_name(file.getOriginalFilename())
+			.file_name(this.upLoad(file)).build());
+		}
+		return fileVOList;
+	}
+	
+	
+	public String upLoad(MultipartFile file) {
+
+		// 업로드할 파일 정보가 없으면
+		// 더이상 코드 진행금지.
+		if(file.isEmpty() || file == null) return null;
+
+		
+		String originName = file.getOriginalFilename();
+		String uuString = UUID.randomUUID().toString();
+		String saveName = uuString + "_" + originName;
+		
+		// 파일을 업로드 하기전에
+		// 저장할 폴더(디렉토리)가 없으면 
+		// 새로운 디렉토리를 생성
+		File saveDir = new File(upLoadFolder);
+		if(!saveDir.exists()) {
+			saveDir.mkdirs();
+		}
+
+		File saveFile = new File(upLoadFolder,saveName);
+		log.debug("ORIGIN" + saveName);
+		
+		try {
+			file.transferTo(saveFile);
+		} catch (IllegalStateException | IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return saveName;
 	}
 	
 	public boolean file_delete(long file_seq) {
