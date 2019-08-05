@@ -1,0 +1,14 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
+<div class="bz-card">
+	<c:if test="${empty BBS.bbs_files }">
+		<img src="${rootPath}/images/blank.png">
+	</c:if>
+	<c:if test="${!empty BBS.bbs_files }">
+		<img src="${rootPath}/images/${BBS.bbs_files[0].file_name}">
+	</c:if>
+	<div class="bz-card-content">${BBS.bbs_title}</div>
+</div>

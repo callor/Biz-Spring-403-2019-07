@@ -15,7 +15,7 @@ import lombok.ToString;
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
-public class BBsDto {
+public class BBsVO {
 	
     private long bbs_seq;//	NUMBER	PRIMARY KEY,
     private long bbs_main_seq;//	NUMBER,	
@@ -26,7 +26,6 @@ public class BBsDto {
     private String bbs_title;//	nVARCHAR2(255),	
     private String bbs_content;//	nVARCHAR2(1000)	
     
-    private List<FileVO> bbs_files ;
-    private List<BBsVO> bbs_rep_list;
+    private List<MultipartFile> bbs_files ;
     
 }
