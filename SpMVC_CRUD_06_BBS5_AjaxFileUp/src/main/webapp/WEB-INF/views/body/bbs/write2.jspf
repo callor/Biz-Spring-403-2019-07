@@ -1,0 +1,141 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core"  prefix="c" %>
+<%@ taglib 
+		uri="http://www.springframework.org/tags/form" 
+		prefix="form" %>
+<script>
+$(function(){
+
+	$(".image-item").click(function(){
+		
+		let file_seq = $(this).attr("data-seq")
+		let file_tag = $(this)
+		
+		if(confirm("이미지를 삭제할까요?")) {
+			$.ajax({
+				url : '${rootPath}/bbs/file_delete?file_seq=' + file_seq,
+				method : 'GET'
+			})
+			.done(function(result){
+				if(result == "OK") {
+					// done에서 this는 대상이 ajax가 되어서
+					// img를 삭제하려고 하는데
+					// 엉뚱한 곳을 가리키게 된다.
+					// $(this).remove()
+					$(file_tag).remove()
+				} else if(result == "FAIL") {
+					alert("파일을 삭제할수 없습니다")
+				}
+			})
+			.fail(function(){
+				alert("서버 오류 발생")
+			})
+		}
+	})
+
+	// dragover, drop 이벤트는 jquery에 함수가 만들어지지 않은상태이므로
+	// on을 이용해서 이벤트를 핸들링 해야 한다.
+	$(".drag_box").on('dragover', function(){
+		$(".drag_box h3").text("파일을 내려 놓으세요")
+		return false
+	})
+	
+	$(".drag_box").on('drop',function(event){
+		$(".drag_box h3").text("파일을 등록하는 중")
+		
+		// drop한 파일들의 정보를 얻기 위한 js 클래스
+		let files = event.originalEvent.dataTransfer.files
+		
+		// input form과 file을 함께 ajax로 업로드하기 위한
+		// 클래스
+		let formData = new FormData()
+		
+		// 업로드할 첫번째 파일1개를 formData 객체에 추가
+		formData.append("file",files[0])
+		$.ajax({
+			url : "${rootPath}/file/file_up",
+			method : "POST",
+			data:formData,
+			processData:false,
+			contentType:false
+		})
+		.done(function(result) {
+			$(".image_box").append(
+				$("<img/>", {
+					src : "${rootPath}/images/" + result,
+					class:"image"
+				})		
+			)
+		})
+		
+		return false
+	})
+	
+})
+
+
+</script>
+<style>
+div.drag_box {
+	width:70%;
+	height: 200px;
+	border : 1px solid blue;
+	text-align:center;
+	margin:0 auto;
+}
+
+div.drag_box:hover {
+	background-color: #ccc;
+	cursor: pointer;
+}
+
+img.image {
+	width:100px;
+	height: 100px;
+}
+</style>
+   
+<fieldset>    
+<form:form modelAttribute="bbsVO" method="POST"
+				enctype="multipart/form-data">
+			
+	<div class="in-box">
+		<label for="bbs_date">작성일자</label>
+		<form:input type="date" id="bbs_date" path="bbs_date" /><br/>
+		<form:errors path="bbs_date" />
+	</div>
+	
+	<div class="in-box">
+		<label for="bbs_time">작성시각</label>
+		<form:input type="text" id="bbs_time" path="bbs_time" />
+		<form:errors path="bbs_time" />
+	</div>
+	<div class="in-box">
+		<label for="bbs_auth">작성자</label>
+		<form:input type="text" id="bbs_auth" path="bbs_auth" />
+		<form:errors path="bbs_auth" />
+	</div>
+	<div class="in-box">
+		<label for="bbs_title">제목</label>
+		<form:input type="text" id="bbs_title" path="bbs_title" />
+		<form:errors path="bbs_title" />
+	</div>
+	<div class="in-box">
+		<label for="bbs_content">내용</label>
+		<form:textarea id="bbs_content" rows="10" path="bbs_content" />
+	</div>
+
+	<div class="drag_box">
+		<h3>파일 Drag</h3>
+	</div>
+
+	<div class="image_box">
+	</div>
+
+	
+	<div class="btn-box center">
+		<button class="bz-btn save">저장</button>
+	</div>
+</form:form>    
+</fieldset>
