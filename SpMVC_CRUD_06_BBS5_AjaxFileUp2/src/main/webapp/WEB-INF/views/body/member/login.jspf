@@ -1,0 +1,45 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<c:set var="rootPath" value="${pageContext.request.contextPath}" />
+<style>
+h3.msg {
+	width:80%;
+	margin:0 auto;
+	background-color: red;
+	color:yellow;
+	font-size:20px;
+}
+</style>
+<script>
+$(function(){
+	
+	if("${LOGIN_MSG}" != "") {
+		$("h3.msg").css("display","block")	
+	}
+	if("LOGIN" == "${LOGIN_MSG}") {
+		$("h3.msg").text("로그인을 해야 사용가능!!")
+	}
+
+	if("FAIL" == "${LOGIN_MSG}") {
+		$("h3.msg").text("아이디, 비밀번호 오류!!!")
+	}
+	
+	if("AUTH" == "${LOGIN_MSG}") {
+		$("h3.msg").text("본인이 작성한 글만 수정 가능!!")
+	}
+
+})
+
+</script>
+
+<article class="login-body">
+	<form class="login-form" method="POST">
+		<h2>로그인</h2>
+		<h3 class="msg"></h3>
+		<input type="text" name="m_userid" id="m_userid" placeholder="사용자 ID">
+		<input type="password" name="m_password" id="m_password" placeholder="비밀번호">
+		<button id="btn-login">로그인</button>
+		<button type="button" id="btn-join">회원가입</button>
+	</form>
+</article>
