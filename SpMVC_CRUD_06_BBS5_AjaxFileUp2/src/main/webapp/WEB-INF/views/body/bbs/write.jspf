@@ -14,7 +14,7 @@ $(function(){
 		
 		if(confirm("이미지를 삭제할까요?")) {
 			$.ajax({
-				url : '${rootPath}/bbs/file_delete?file_seq=' + file_seq,
+				url : '${rootPath}/ajax_file/file_delete?file_seq=' + file_seq,
 				method : 'GET'
 			})
 			.done(function(result){
@@ -52,6 +52,17 @@ $(function(){
 		let formData = new FormData()
 		
 		for(let i = 0 ; i < files.length ; i++) {
+			
+			let file_name = files[i].name
+			if(/(\.gif|\.jpg|\.jpeg|\.png)$/i.test(file_name) == false) {
+				alert("업로드는 *.gif, *.jpg, *.jpeg, *.png 파일만 가능")
+				
+				$(".drag_box h3").css("color","red")
+				$(".drag_box h3").css("font-size","20px")
+				$(".drag_box h3").text("파일 업로드 실패!!!")
+				return false;
+			}
+			
 			formData.append("files",files[i])	
 		}
 		
@@ -86,6 +97,9 @@ $(function(){
 					})		
 				)
 			}
+			
+			$(".drag_box h3").css("color","blue")
+			$(".drag_box h3").css("font-size","20px")
 			$(".drag_box h3").text("파일 업로드 성공!!")
 		})
 		
@@ -103,6 +117,15 @@ div.drag_box {
 	border : 1px solid blue;
 	text-align:center;
 	border-radius: 5px;
+	
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	
+}
+
+div.drag_box h3 {
+	display: inline-block;
 }
 
 div.drag_box:hover {

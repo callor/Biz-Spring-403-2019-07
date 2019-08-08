@@ -21,4 +21,5 @@ NaverClient.*
 RaffleController.*
 mail-context.xml
 NaverSecret.*
+
 send-mail-context.*

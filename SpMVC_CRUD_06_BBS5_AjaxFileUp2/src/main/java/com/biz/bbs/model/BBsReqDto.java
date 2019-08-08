@@ -49,7 +49,7 @@ public class BBsReqDto {
     
     private String bbs_content;//	nVARCHAR2(1000)	
     
-    private List<String> bbs_files ;
-    private List<String> bbs_origin_files ;
+    private List<String> bbs_files = null;
+    private List<String> bbs_origin_files = null ;
     
 }

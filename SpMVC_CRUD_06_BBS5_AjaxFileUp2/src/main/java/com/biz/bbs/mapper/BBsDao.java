@@ -2,6 +2,7 @@ package com.biz.bbs.mapper;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.InsertProvider;
 import org.apache.ibatis.annotations.Many;
 import org.apache.ibatis.annotations.Result;
@@ -88,6 +89,9 @@ public interface BBsDao {
 	
 	@UpdateProvider(type=BBsSQL.class,method="bbs_update_sql")
 	public int update(BBsReqDto bbsReqDto);
+
+	@Delete(" DELETE FROM tbl_bbs WHERE bbs_seq = #{bbs_seq}")
+	public int delete(long bbs_seq);
 	
 	
 }

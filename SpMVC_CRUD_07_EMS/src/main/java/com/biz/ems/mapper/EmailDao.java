@@ -1,11 +1,15 @@
-package com.biz.ems.model;
+package com.biz.ems.mapper;
 
 import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
+
+import com.biz.ems.model.EmailVO;
 
 public interface EmailDao {
 
+	@Select(" SELECT * FROM tbl_ems ")
 	public List<EmailVO> selectAll();
 	public EmailVO findBySeq(long ems_seq);
 	

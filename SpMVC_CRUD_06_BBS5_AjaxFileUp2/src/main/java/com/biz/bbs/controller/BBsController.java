@@ -95,6 +95,7 @@ public class BBsController {
 		
 		bbsReqDto.setBbs_date(curDate);
 		bbsReqDto.setBbs_time(curTime);
+		// bbsReqDto.setBbs_files(null);
 		model.addAttribute("bbsReqDto",bbsReqDto);
 		
 		model.addAttribute("BODY","BBS_WRITE");
@@ -187,16 +188,7 @@ public class BBsController {
 		return "redirect:/bbs/list";
 		
 	}
-	
-	@ResponseBody
-	@RequestMapping(value="/file_delete")
-	public String file_delete(long file_seq) {
-		
-		boolean okDelete = aFService.file_delete(file_seq);
-		if(okDelete) return "OK";
-		else return "FAIL";
 
-	}
 	
 	/*
 	 * PathVariable
@@ -256,5 +248,28 @@ public class BBsController {
 		return "redirect:/bbs/list";
 	
 	}
+	
+	/*
+	 * 게시글을 삭제하면
+	 * 1. 첨부파일확인 >> 첨부파일 삭제
+	 * 2. 첨부파일 table 정보 삭제
+	 * 3. 게시글 삭제
+	 */
+	@RequestMapping(value="/delete/{bbs_seq}", method=RequestMethod.GET)
+	public String delete(@PathVariable long bbs_seq) {
+		
+		int ret = bbsService.delete(bbs_seq);
+		return "redirect:/bbs/list";
+		
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
 		
 }

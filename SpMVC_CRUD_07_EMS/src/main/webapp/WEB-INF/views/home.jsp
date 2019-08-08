@@ -27,17 +27,16 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 </head>
 <body>
+
 	<%@ include file="/WEB-INF/views/include/include-header.jspf" %>
 	<section>
 		<c:choose>
-
-			<c:when test="${BODY == 'JOIN' }">
+			<c:when test="${BODY == 'WRITE' }">
+				<%@ include file="/WEB-INF/views/body/ems/write.jspf" %>
 			</c:when>		
-
 			<c:otherwise>
-				<h3>Email Management System 1.0</h3>
+				<%@ include file="/WEB-INF/views/body/ems/list.jspf" %>
 			</c:otherwise>
-
 		</c:choose>	
 	</section>
 	

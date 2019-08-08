@@ -147,4 +147,28 @@ public class AjaxFileService {
 		return 0;
 	}
 
+	
+	/*
+	 * 첨부파일 삭제 절차
+	 * 1. tbl_bbs_file에서 첨부파일 목록 추출
+	 * 2. 해당하는 실제 파일을 삭제
+	 * 3. table에 해당 정보 삭제
+	 */
+	public int files_delete(long bbs_seq) {
+
+		List<FileVO> fileList = fDao.finbyBBsSeq(bbs_seq);
+		for(FileVO fileVO : fileList) {
+			
+			//1. File 객체
+			File delFile = new File(upLoadFolder, fileVO.getFile_name());
+			
+			//2. 실제파일을 삭제
+			if(delFile.exists()) delFile.delete();
+		}
+		
+		int ret = fDao.deletes(bbs_seq);
+		return 0;
+
+	}
+
 }

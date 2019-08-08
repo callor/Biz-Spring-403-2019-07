@@ -32,7 +32,6 @@
 		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
 		<property name="dataSource" ref='ds'/>
 	</bean>
-
-	<mybatis-spring:scan base-package="com.biz.bbs.mapper"/>
+	<mybatis-spring:scan base-package="com.biz.ems.mapper"/>
 
 </beans>

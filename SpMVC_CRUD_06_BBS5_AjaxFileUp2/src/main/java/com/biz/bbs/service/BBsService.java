@@ -65,6 +65,16 @@ public class BBsService {
 		int ret = bDao.update(bbsReqDto);
 		return 0;
 	}
-	
-	
+
+	public int delete(long bbs_seq) {
+		
+		// 첨부파일 삭제
+		int file_ret = aFService.files_delete(bbs_seq);
+		
+		// 게시글을 삭제하면 두 테이블이 참조 무결성 관계이므로
+		// 첨부파일 목록은 자동으로 삭제된다.
+		int ret = bDao.delete(bbs_seq);
+		return 0;
+
+	}
 }
