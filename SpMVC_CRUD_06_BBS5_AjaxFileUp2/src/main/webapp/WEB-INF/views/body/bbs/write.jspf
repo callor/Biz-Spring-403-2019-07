@@ -128,7 +128,33 @@ img.image {
 	color:red;
 }
 </style>
-   
+<%
+/*
+  파일 업로드를 위해서
+  commons-fileUpload와 commons-io를 pom.xml에 등록하고
+  form에 enctype을 mulipart/form-data로 지정을 하면
+  파일 업로드가 가능하다.
+  
+  이때 파일을 선택하고 저장버튼을 누르면 
+  보통 400 오류가 발생을 한다
+  이 상황은 CommonsMultipartResolver 를
+  
+  *-context.xml에 설정을 하지 않아서 발생하는 문제이다.
+  
+  이 상황에서
+  만약 파일을 선택하지 않고 저장버튼을 누르면
+  오류없이 저장이 이루어지지만, 
+  모든 값이 사라져 DB에 null값이 저장된다.
+  
+  이때는 내부에 오류가 밖으로 노출되지 않는 상황일뿐
+  정상적인 상황이 아니다.
+  
+  그럼 이때는 enctype을 삭제하거나
+  CommonsMultipartResolver 을 설정해 주어야 정상적인 
+  내용 저장이 가능하다.
+
+*/
+%>   
 <fieldset>    
 <form:form modelAttribute="bbsReqDto" method="POST"
 				enctype="multipart/form-data">

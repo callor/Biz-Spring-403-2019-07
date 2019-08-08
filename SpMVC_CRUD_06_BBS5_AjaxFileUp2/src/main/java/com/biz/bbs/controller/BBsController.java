@@ -74,8 +74,6 @@ public class BBsController {
 		return "home";
 		
 	}
-
-	
 	
 	@RequestMapping(value="/write",method=RequestMethod.GET)
 	public String write(
@@ -176,7 +174,6 @@ public class BBsController {
 		return "home";
 		
 	}
-	
 	
 	@RequestMapping(value="/update",method = RequestMethod.POST)
 	public String update(

@@ -8,6 +8,7 @@ import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
@@ -106,9 +107,22 @@ public class AjaxFileService {
 		
 	}
 
+	/*
+	 * mybatis에서 transaction 방식으로 다중 쿼리를 실행하라
+	 */
+	@Transactional
 	public int insert(BBsReqDto bbsReqDto) {
 
 		List<String> bbs_files = bbsReqDto.getBbs_files();
+		
+		/*
+		 * 파일을 drag upload를 하지 않고 글 저장 버튼을 클릭하면
+		 * bbs_files에 아무런 값이 없어서 아래 코드가 오류를
+		 * 일으킨다
+		 * 이때 bbs_files가 없으면 코드를 중단하도록 
+		 */
+		if(bbs_files == null) return -1;
+		
 		for(String file_name : bbs_files) {
 
 			// 1. 각 항목을 변수에 담고 최종적으로 insert 수행하기
