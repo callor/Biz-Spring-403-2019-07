@@ -4,9 +4,24 @@
 <%@ taglib 
 		uri="http://www.springframework.org/tags/form" 
 		prefix="form" %>
+<script src="${rootPath}/resources/se2/js/service/HuskyEZCreator.js"></script>		
 <script>
 $(function(){
 
+	var oEditors = [];
+	nhn.husky.EZCreator.createInIFrame({
+	 	oAppRef: oEditors,
+	 	elPlaceHolder: "ems_content",
+	 	sSkinURI: "${rootPath}/resources/se2/SmartEditor2Skin.html",
+	 	fCreator: "createSEditor2"
+	})
+	
+	$("#btn-send").click(function(){
+		oEditors.getById["ems_content"].exec("UPDATE_CONTENTS_FIELD",[])
+		$("form").submit();
+	})
+	
+	
 	$(".image-item").click(function(){
 		
 		let file_seq = $(this).attr("data-seq")
@@ -79,6 +94,11 @@ img.image {
 	font-size:12px;
 	color:red;
 }
+
+div.in-box iframe {
+	margin-left:18px;
+}
+
 </style>
 <fieldset>    
 <form:form modelAttribute="emailVO" method="POST"
@@ -120,7 +140,11 @@ img.image {
 	</div>
 	<div class="in-box">
 		<label for="ems_content">내용</label>
-		<form:textarea id="ems_content" rows="10" path="ems_content" />
+		<form:textarea 
+				style="width:650px; height:400px;"
+				id="ems_content" 
+				rows="10" 
+				path="ems_content" />
 	</div>
 
 	<div class="in-box">
@@ -140,7 +164,7 @@ img.image {
 
 	
 	<div class="btn-box center">
-		<button class="bz-btn save">저장</button>
+		<button type="button" id="btn-send" class="bz-btn save">메일보내기</button>
 	</div>
 </form:form>    
 </fieldset>

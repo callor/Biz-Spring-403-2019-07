@@ -53,13 +53,17 @@ public class EmailController {
 	@RequestMapping(value="/write",method=RequestMethod.POST)
 	public String write(
 			@ModelAttribute("emailVO") EmailVO emailVO,
-			@RequestParam MultipartFile file1,
+			@RequestParam("file1") MultipartFile file1,
+			@RequestParam("file2") MultipartFile file2,
 			BindingResult result,
 			Model model
 			) {
 		
-		String fileName = fService.fileUp(file1);
-		emailVO.setEms_file1(fileName);
+		String file_name1 = fService.fileUp(file1);
+		emailVO.setEms_file1(file_name1);
+		String file_name2 = fService.fileUp(file2);
+		emailVO.setEms_file2(file_name2);
+		
 		xMailService.sendMail(emailVO);
 		return "home";
 	
